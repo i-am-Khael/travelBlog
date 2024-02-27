@@ -2,3 +2,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+
+    .gridContainer {
+        @apply w-full h-screen overflow-hidden grid grid-cols-[250px_1fr] max-sm:grid-cols-[1fr];
+    }
+
+    .dashSideBar {
+        @apply w-full col-start-1 col-end-2 max-sm:hidden;
+    }
+
+    .mainContainer {
+        @apply w-full col-start-2 col-end-3 max-sm:col-start-1;
+    }
+
+}

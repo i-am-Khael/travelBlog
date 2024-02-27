@@ -3,7 +3,7 @@
     <div class="w-[90%] max-w-[90rem] mx-auto py-2" >
 
         <h1>
-            <a href="/">TravelBlog</a>
+            <a href="{{ route('page.index') }}">TravelBlog</a>
         </h1>
 
     </div>
