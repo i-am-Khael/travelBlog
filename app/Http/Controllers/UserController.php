@@ -13,9 +13,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        // $data = User::all();
-        // return view('dashboard.index', [ 'users' => $data ]);
-        return view('dashboard.index');
+        $data = User::simplePaginate(5);
+        return view('dashboard.index', [ 'users' => $data ]);
     }
 
     /**
@@ -23,7 +22,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.addUser');
     }
 
     /**
@@ -31,7 +30,24 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:60',
+            'email' => 'required|email',
+            'password' => 'required|min:8'
+        ]);
+
+        $result = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password
+        ]);
+
+        if($result->save()){
+            return redirect()->route('dash.create')->with('success', 'Added user successfully!');
+        } else {
+            return redirect()->route('dash.create')->with('error', 'Adding user failed!');
+        }
+
     }
 
     /**

@@ -11,6 +11,9 @@
 </head>
 <body class="gridContainer bg-gray-950 text-gray-400" >
     <x-dashSideBar/>
-    @yield('content')
+    <main class="mainContainer" >
+        <x-dashNavBar/>
+        @yield('content')
+    </main>
 </body>
 </html>
