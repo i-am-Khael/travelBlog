@@ -11,7 +11,7 @@
 </head>
 <body class="gridContainer bg-gray-950 text-gray-400" >
     <x-dashSideBar/>
-    <main class="mainContainer" >
+    <main class="mainContainer overflow-scroll" >
         <x-dashNavBar/>
         @yield('content')
     </main>

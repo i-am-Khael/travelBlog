@@ -6,8 +6,10 @@
 
     <div class="w-full px-4 rounded-md flex items-center justify-between shadow-md bg-gray-900" >
         <h2>Users</h2>
-        <a href="{{ route('dash.create') }}" class="px-4 py-2 bg-green-700 hover:bg-green-600 text-white" >Add</a>
+        <a href="{{ route('user.create') }}" class="px-4 py-2 bg-green-700 hover:bg-green-600 text-white" >Add</a>
     </div>
+
+    <x-flashMessage/>
 
     <div class="w-full p-6 overflow-hidden overflow-x-scroll" >
         <table class="w-full" >
@@ -27,8 +29,9 @@
                     </td>
                     <td class="max-sm:hidden" >{{ $user->email }}</td>
                     <td class="flex gap-2" >
-                        <a href="">Edit</a>
-                        <form action="" method="POST">
+                        <a href="{{ route('user.edit', $user->id) }}">Edit</a>
+                        <form action="{{ route('user.destroy', $user->id) }}" method="POST">
+                            @method('delete') @csrf
                             <button>Delete</button>
                         </form>
                     </td>

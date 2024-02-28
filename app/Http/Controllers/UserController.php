@@ -32,7 +32,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|max:60',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8'
         ]);
 
@@ -43,9 +43,9 @@ class UserController extends Controller
         ]);
 
         if($result->save()){
-            return redirect()->route('dash.create')->with('success', 'Added user successfully!');
+            return redirect()->route('user.create')->with('success', 'Added user successfully!');
         } else {
-            return redirect()->route('dash.create')->with('error', 'Adding user failed!');
+            return redirect()->route('user.create')->with('error', 'Adding user failed!');
         }
 
     }
@@ -63,7 +63,8 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = User::findOrFail($id);
+        return view('dashboard.updateUser', [ 'user' => $data ]);
     }
 
     /**
@@ -71,7 +72,23 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $res = User::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|max:60',
+            'email' => 'required|email|unique:users,email'
+        ]);
+
+        $res->name = $request->name;
+        $res->email = $request->email;
+
+        if($res->save()){
+            return redirect()->route('user.update', $id)->with('success', 'Updated data successfully!');
+        }else {
+            return redirect()->route('user.update', $id)->with('error', 'Updating Failed!');
+        }
+
     }
 
     /**
@@ -79,6 +96,11 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $res = User::findOrFail($id);
+        if($res->delete()){
+            return redirect()->route('user.index')->with('success', 'User deleted!');
+        } else {
+            return redirect()->route('user.index')->with('error', 'Deleting user failed!');
+        }
     }
 }

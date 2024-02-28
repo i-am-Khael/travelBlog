@@ -6,8 +6,14 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', [ PageController::class, 'index' ])->name('page.index');
 
-Route::get('/dashboard', [ UserController::class, 'index' ])->name('dash.index');
-Route::get('/dashboard/add-user', [ UserController::class, 'create' ])->name('dash.create');
-Route::post('/dashboard/add-user', [ UserController::class, 'store' ])->name('dash.store');
+Route::get('/dashboard', [ UserController::class, 'index' ])->name('user.index');
+
+Route::get('/dashboard/add-user', [ UserController::class, 'create' ])->name('user.create');
+Route::post('/dashboard/add-user', [ UserController::class, 'store' ])->name('user.store');
+
+Route::get('/dashboard/update-user/{id}', [ UserController::class, 'edit' ])->name('user.edit');
+Route::put('/dashboard/update-user/{id}', [ UserController::class, 'update' ])->name('user.update');
+
+Route::delete('/dashboard/delete-user/{id}', [ UserController::class, 'destroy' ])->name('user.destroy');
 
 
