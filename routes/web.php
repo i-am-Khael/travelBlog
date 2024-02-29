@@ -17,5 +17,8 @@ Route::delete('/dashboard/delete-user/{id}', [ UserController::class, 'destroy' 
 Route::get('/dashboard/header-section', [ HeaderController::class, 'index' ])->name('header.index');
 Route::get('/dashboard/header-section/create-content', [ HeaderController::class, 'create' ])->name('header.create');
 Route::post('/dashboard/header-section/create-content', [ HeaderController::class, 'store' ])->name('header.store');
+Route::get('/dashboard/header-section/update/{id}', [ HeaderController::class, 'edit' ])->name('header.edit');
+Route::put('/dashboard/header-section/update/{id}', [ HeaderController::class, 'update' ])->name('header.update');
 Route::post('/dashboard/header-section/update-published/{id}', [ HeaderController::class, 'updatePublished' ])->name('header.updatePublished');
+Route::delete('/dashboard/header-section/delete-content/{id}', [ HeaderController::class, 'destroy' ])->name('header.delete');
 

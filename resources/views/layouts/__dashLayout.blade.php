@@ -16,9 +16,8 @@
         @yield('content')
     </main>
     <script defer >
-        const isPublishedForm = document.querySelector('#isPublishedForm');
-        console.log(isPublishedForm);
-        const submitForm = () => {
+        const submitForm = (id) => {
+            const isPublishedForm = document.querySelector(`#form${id}`);
             isPublishedForm.submit();
         }
     </script>

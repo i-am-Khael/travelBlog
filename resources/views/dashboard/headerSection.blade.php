@@ -29,14 +29,17 @@
                     <td>{{ $content->desc }}</td>
                     <td>{{ $content->image }}</td>
                     <td>
-                        <form id="isPublishedForm" action="{{ route('header.updatePublished', $content->id) }}" method="POST" >
+                        <form id="form{{$content->id}}" action="{{ route('header.updatePublished', $content->id) }}" method="POST" >
                             @csrf
-                            <input name="isPublished" type="checkbox" {{ $content->isPublished ? 'checked' : '' }} onchange="submitForm()" >
+                            <input name="isPublished" type="checkbox" {{ $content->isPublished ? 'checked' : '' }} onchange="submitForm({{$content->id}})" >
                         </form>
                     </td>
                     <td class="flex gap-4">
-                        <a href="">Edit</a>
-                        <a href="">Delete</a>
+                        <a href="{{ route('header.edit', $content->id) }}">Edit</a>
+                        <form action="{{ route('header.delete', $content->id) }}" method="POST">
+                            @method('delete') @csrf
+                            <button>Delete</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
