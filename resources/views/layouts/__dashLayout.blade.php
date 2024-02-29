@@ -15,5 +15,12 @@
         <x-dashNavBar/>
         @yield('content')
     </main>
+    <script defer >
+        const isPublishedForm = document.querySelector('#isPublishedForm');
+        console.log(isPublishedForm);
+        const submitForm = () => {
+            isPublishedForm.submit();
+        }
+    </script>
 </body>
 </html>
