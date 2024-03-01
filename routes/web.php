@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HeaderController;
+use App\Http\Controllers\ArticleController;
 
 Route::get('/', [ PageController::class, 'index' ])->name('page.index');
 
@@ -21,4 +22,6 @@ Route::get('/dashboard/header-section/update/{id}', [ HeaderController::class, '
 Route::put('/dashboard/header-section/update/{id}', [ HeaderController::class, 'update' ])->name('header.update');
 Route::post('/dashboard/header-section/update-published/{id}', [ HeaderController::class, 'updatePublished' ])->name('header.updatePublished');
 Route::delete('/dashboard/header-section/delete-content/{id}', [ HeaderController::class, 'destroy' ])->name('header.delete');
+
+Route::get('dashboard/articles', [ ArticleController::class, 'index' ])->name('article.index');
 

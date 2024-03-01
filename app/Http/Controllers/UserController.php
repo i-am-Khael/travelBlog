@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data = User::simplePaginate(5);
+        $data = User::paginate(5);
         return view('dashboard.index', [ 'users' => $data ]);
     }
 

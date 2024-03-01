@@ -13,7 +13,6 @@ class PageController extends Controller
         $headerData = Header::where('isPublished', true)->get();
         $data = [
             'header' => $headerData
-
         ];
 
         return view('pages.index', $data );
