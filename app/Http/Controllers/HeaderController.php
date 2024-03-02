@@ -31,11 +31,13 @@ class HeaderController extends Controller
     {
 
         $request->validate([
+            'userID' => 'required',
             'title' => 'required|max:255',
             'desc' => 'required|string'
         ]);
 
         $res = Header::create([
+            'user_id' => $request->userID,
             'title' => $request->title,
             'desc' => $request->desc
         ]);

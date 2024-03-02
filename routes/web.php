@@ -33,6 +33,9 @@ Route::prefix('dashboard')
     Route::delete('header-section/delete-content/{id}', [ HeaderController::class, 'destroy' ])->name('header.delete');
 
     Route::get('articles', [ ArticleController::class, 'index' ])->name('article.index');
+    Route::get('articles/create', [ ArticleController::class, 'create' ])->name('article.create');
+    Route::post('articles/create', [ ArticleController::class, 'store' ])->name('article.store');
+
 
 });
 

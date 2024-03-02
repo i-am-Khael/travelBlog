@@ -9,6 +9,8 @@
 
         @csrf <x-flashMessage/>
 
+        <input name="userID" type="text" value="{{ auth()->user()->id }}" hidden >
+
         <div class="flex flex-col gap-2" >
             <label for="title">Title</label>
             <input name="title" id="title" type="text" required >

@@ -21,7 +21,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.createArticle');
     }
 
     /**
@@ -29,7 +29,27 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'userID' => 'required',
+            'title' => 'required',
+            'content' => 'required',
+            'featured' => 'required'
+        ]);
+
+        $res = Article::create([
+            'user_id' => $request->userID,
+            'title' => $request->title,
+            'content'=> $request->content,
+            'featured' => $request->featured
+        ]);
+
+        if($res->save()) {
+            return redirect()->route('article.create')->with('success', 'Successfully created article.');
+        } else {
+            return redirect()->route('article.create')->with('error', 'Failed creating article.');
+        }
+
     }
 
     /**
