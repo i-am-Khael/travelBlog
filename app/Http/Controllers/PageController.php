@@ -18,4 +18,8 @@ class PageController extends Controller
         return view('pages.index', $data );
     }
 
+    public function loginPage() {
+        return view('login');
+    }
+
 }
