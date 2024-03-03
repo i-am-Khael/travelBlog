@@ -35,6 +35,9 @@ Route::prefix('dashboard')
     Route::get('articles', [ ArticleController::class, 'index' ])->name('article.index');
     Route::get('articles/create', [ ArticleController::class, 'create' ])->name('article.create');
     Route::post('articles/create', [ ArticleController::class, 'store' ])->name('article.store');
+    Route::get('articles/edit/{id}', [ ArticleController::class, 'edit' ])->name('article.edit');
+    Route::put('articles/edit/{id}', [ ArticleController::class, 'update' ])->name('article.update');
+    Route::delete('articles/delete/{id}', [ ArticleController::class, 'destroy' ])->name('article.delete');
 
 
 });

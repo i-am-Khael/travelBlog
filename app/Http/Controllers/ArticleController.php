@@ -13,7 +13,7 @@ class ArticleController extends Controller
     public function index()
     {
         $res = Article::paginate(10);
-        return view('dashboard.articles');
+        return view('dashboard.articles', [ 'data' => $res ]);
     }
 
     /**
@@ -65,7 +65,8 @@ class ArticleController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $res = Article::findOrFail($id);
+        return view('dashboard.editArticle', [ 'data' => $res ]);
     }
 
     /**
@@ -73,7 +74,29 @@ class ArticleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'featured' => 'required'
+        ]);
+
+        $res = Article::findOrFail($id);
+        $res->user_id = auth()->user()->id;
+        $res->title = $request->title;
+        $res->content = $request->content;
+        $res->featured = $request->featured;
+
+        if( $res->save() ) {
+
+            return redirect()->route('article.edit', $id)->with('success', 'Updated Successfully!');
+
+        } else {
+
+            return redirect()->route('article.edit', $id)->with('error', 'Updating failed!');
+
+        }
+
     }
 
     /**
@@ -81,6 +104,17 @@ class ArticleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $res = Article::findOrFail($id);
+
+        if( $res->delete() ) {
+
+            return redirect()->route('article.index')->with('success', 'Deleted article successfully!');
+
+        } else {
+
+            return redirect()->route('article.index')->with('error', 'Deleting article failed!');
+
+        }
+
     }
 }

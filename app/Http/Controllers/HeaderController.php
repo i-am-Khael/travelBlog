@@ -43,8 +43,11 @@ class HeaderController extends Controller
         ]);
 
         if($res->save()){
+
             return redirect()->route('header.index')->with('success', 'Save content successfully!');
+
         }else {
+
             return redirect()->route('header.create')->with('success', 'Saving content failed!');
         }
 
@@ -86,9 +89,13 @@ class HeaderController extends Controller
         $res->isPublished = $request->isPublished;
 
         if( $res->save() ){
+
             return redirect()->route('header.edit', $id)->with('success', 'Updated Successfully!');
+
         }else{
+
             return redirect()->route('header.edit', $id)->with('error', 'Updating failed!');
+
         }
 
     }
@@ -99,23 +106,38 @@ class HeaderController extends Controller
     public function destroy(string $id)
     {
         $res = Header::findOrFail($id);
+
         if($res->delete()){
+
             return redirect()->route('header.index')->with('success', 'Deleted Content Sucessfully!');
+
         }else{
+
             return redirect()->route('header.index')->with('error', 'Deleting content failed!');
+
         }
+
     }
 
 
     public function updatePublished(Request $request, string $id) {
+
         $published = false;
+
         $request->isPublished === "on" ? $published = true : $published = false;
         $res = Header::findOrFail($id);
         $res->isPublished = $published;
+
         if( $res->save() ){
+
             return redirect()->route('header.index');
+
         } else {
+
             return redirect()->route('header.index')->with('error', 'Publishing content failed!');
+
         }
+
     }
+
 }
