@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Header;
 
@@ -31,15 +32,20 @@ class HeaderController extends Controller
     {
 
         $request->validate([
-            'userID' => 'required',
             'title' => 'required|max:255',
-            'desc' => 'required|string'
+            'desc' => 'required|string',
+            'image' => 'required|image|mimes:jpg,png,webp|max:25700'
         ]);
 
+        $image = $request->file('image');
+        $imageName = time().'.'.$image->getClientOriginalExtension();
+        $imagePath = $image->storeAs('uploads', $imageName, 'public');
+
         $res = Header::create([
-            'user_id' => $request->userID,
+            'user_id' => auth()->user()->id,
             'title' => $request->title,
-            'desc' => $request->desc
+            'desc' => $request->desc,
+            'image' => $imagePath,
         ]);
 
         if($res->save()){
@@ -79,7 +85,7 @@ class HeaderController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'desc' => 'required|string',
-            'isPublished' => 'required'
+            'isPublished' => 'required',
         ]);
 
         $res = Header::findOrFail($id);
@@ -87,6 +93,23 @@ class HeaderController extends Controller
         $res->title = $request->title;
         $res->desc = $request->desc;
         $res->isPublished = $request->isPublished;
+
+        if ($request->hasFile('image')) {
+
+            $request->validate([
+                'image' => 'image|mimes:jpg,png,webp|max:25700'
+            ]);
+
+            if ($res->image) {
+                Storage::disk('public')->delete($res->image);
+            }
+
+            $image = $request->file('image');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $imagePath = $image->storeAs('uploads', $imageName, 'public');
+            $res->image = $imagePath;
+
+        }
 
         if( $res->save() ){
 
@@ -106,6 +129,9 @@ class HeaderController extends Controller
     public function destroy(string $id)
     {
         $res = Header::findOrFail($id);
+        if ($res->image && Storage::disk('public')->exists($res->image)) {
+            Storage::disk('public')->delete($res->image);
+        }
 
         if($res->delete()){
 

@@ -10,7 +10,8 @@ use App\Http\Controllers\ArticleController;
 
 Route::get('/', [ PageController::class, 'index' ])->name('page.index');
 Route::get('login', [ PageController::class, 'loginPage' ])->name('login');
-Route::post('login', [ AUthController::class, 'authUser' ])->name('auth.login');
+Route::post('login', [ AuthController::class, 'authUser' ])->name('auth.login');
+Route::get('logout', [ PageController::class, 'logout' ])->name('auth.logout');
 
 
 Route::prefix('dashboard')

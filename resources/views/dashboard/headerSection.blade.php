@@ -27,7 +27,8 @@
                 <tr>
                     <td>{{ $content->title }}</td>
                     <td>{{ $content->desc }}</td>
-                    <td>{{ $content->image }}</td>
+                    {{-- <td><img src="../../../storage/app/public/{{$content->image}}" alt="image"></td> --}}
+                    <td><img src="{{asset('storage/'.$content->image)}}" alt="image"></td>
                     <td>
                         <form id="form{{$content->id}}" action="{{ route('header.updatePublished', $content->id) }}" method="POST" >
                             @csrf
