@@ -6,7 +6,8 @@
 
     <x-flashMessage/>
 
-    <form action="{{ route('article.update', $data->id) }}" method="POST" class="w-full flex flex-col gap-6" >
+    <form action="{{ route('article.update', $data->id) }}" method="POST" enctype="multipart/form-data"
+        class="w-full flex flex-col gap-6" >
 
         @method('put') @csrf
 
@@ -20,6 +21,12 @@
             <label for="content">Content</label>
             <textarea name="content" id="content" cols="30" rows="10">{{ $data->content }}</textarea>
             <x-formErrors inputName="content" />
+        </div>
+
+        <div class="flex flex-col gap-2">
+            <label for="image">Image</label>
+            <input name="image" id="image" type="file" >
+            <x-formErrors inputName="image" />
         </div>
 
         <div class="flex flex-col gap-2">

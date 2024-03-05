@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Article;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -31,23 +32,32 @@ class ArticleController extends Controller
     {
 
         $request->validate([
-            'userID' => 'required',
             'title' => 'required',
             'content' => 'required',
+            'image' => 'required|mimes:jpg,png,webp|max:25700',
             'featured' => 'required'
         ]);
 
+        $image = $request->file('image');
+        $imageName = time().'.'.$image->getClientOriginalExtension();
+        $imagePath = $image->storeAs('uploads', $imageName, 'public');
+
         $res = Article::create([
-            'user_id' => $request->userID,
+            'user_id' => auth()->user()->id,
             'title' => $request->title,
             'content'=> $request->content,
+            'image' => $imagePath,
             'featured' => $request->featured
         ]);
 
         if($res->save()) {
+
             return redirect()->route('article.create')->with('success', 'Successfully created article.');
+
         } else {
+
             return redirect()->route('article.create')->with('error', 'Failed creating article.');
+
         }
 
     }
@@ -78,6 +88,7 @@ class ArticleController extends Controller
         $request->validate([
             'title' => 'required',
             'content' => 'required',
+            'image' => 'max:25700',
             'featured' => 'required'
         ]);
 
@@ -86,6 +97,23 @@ class ArticleController extends Controller
         $res->title = $request->title;
         $res->content = $request->content;
         $res->featured = $request->featured;
+
+        if ($request->hasFile('image')) {
+
+            $request->validate([
+                'image' => 'image|mimes:jpg,png,webp|max:25700'
+            ]);
+
+            if ($res->image) {
+                Storage::disk('public')->delete($res->image);
+            }
+
+            $image = $request->file('image');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $imagePath = $image->storeAs('uploads', $imageName, 'public');
+            $res->image = $imagePath;
+
+        }
 
         if( $res->save() ) {
 
@@ -105,6 +133,11 @@ class ArticleController extends Controller
     public function destroy(string $id)
     {
         $res = Article::findOrFail($id);
+
+        if ($res->image && Storage::disk('public')->exists($res->image)) {
+            Storage::disk('public')->delete($res->image);
+        }
+
 
         if( $res->delete() ) {
 

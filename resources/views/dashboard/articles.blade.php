@@ -17,6 +17,7 @@
             <thead>
                 <tr class="text-left">
                     <th>Title</th>
+                    <th>Image</th>
                     <th>Featured</th>
                     <th>Action</th>
                 </tr>
@@ -25,6 +26,10 @@
                 @foreach ( $data as $article )
                 <tr>
                     <td>{{ $article->title }}</td>
+                    <td>
+                        <img src="{{asset('storage/'.$article->image)}}" alt="Image"
+                            class="w-[100px] h-[50px]">
+                    </td>
                     <td>{{ $article->featured === 1 ? 'Yes' : 'No' }}</td>
                     <td class="flex gap-3">
                         <a href="{{ route('article.edit', $article->id) }}">Edit</a>

@@ -26,9 +26,11 @@
                 @foreach ($headerContent as $content )
                 <tr>
                     <td>{{ $content->title }}</td>
-                    <td>{{ $content->desc }}</td>
-                    {{-- <td><img src="../../../storage/app/public/{{$content->image}}" alt="image"></td> --}}
-                    <td><img src="{{asset('storage/'.$content->image)}}" alt="image"></td>
+                    <td class="text-wrap line-clamp-1">{{ $content->desc }}</td>
+                    <td>
+                        <img src="{{asset('storage/'.$content->image)}}" alt="image"
+                            class="w-[100px] h-[50px]">
+                    </td>
                     <td>
                         <form id="form{{$content->id}}" action="{{ route('header.updatePublished', $content->id) }}" method="POST" >
                             @csrf

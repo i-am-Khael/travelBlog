@@ -6,11 +6,10 @@
 
     <x-flashMessage/>
 
-    <form action="{{route('article.store')}}" method="POST" class="flex flex-col gap-6" >
+    <form action="{{route('article.store')}}" method="POST" enctype="multipart/form-data"
+        class="flex flex-col gap-6" >
 
         @csrf
-
-        <input name="userID" type="text" value="{{ auth()->user()->id }}" hidden >
 
         <div class="flex flex-col gap-2" >
             <label for="title">Title</label>
@@ -23,6 +22,12 @@
             <label for="content">Content</label>
             <textarea name="content" id="" cols="30" rows="10" required ></textarea>
             <x-formErrors inputName="content" />
+        </div>
+
+        <div>
+            <label for="image">Image</label>
+            <input name="image" id="image" type="file" required >
+            <x-formErrors inputName="image" />
         </div>
 
         <div class="flex flex-col gap-2" >
