@@ -2,7 +2,7 @@
 @extends('layouts.__pagesLayout')
 @section('title', 'Home')
 @section('content')
-<main class="w-[90%] max-w-[90rem] h-full mx-auto" >
-    <x-heroSection contents="" />
+<main class="max-w-[2000px] h-full mx-auto" >
+    <x-heroSection :contents="$header[0]" />
 </main>
 @endsection

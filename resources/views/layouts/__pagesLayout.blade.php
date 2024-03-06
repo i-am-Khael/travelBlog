@@ -9,7 +9,7 @@
     @vite('resources/css/app.css')
     <title>{{ config('app.name') }} | @yield('title')</title>
 </head>
-<body>
+<body class="w-full h-full bg-gray-900 text-gray-50">
     <x-nav/>
     @yield('content')
     <x-footer/>
