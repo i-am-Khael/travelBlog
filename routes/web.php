@@ -10,6 +10,8 @@ use App\Http\Controllers\ArticleController;
 
 Route::get('/', [ PageController::class, 'index' ])->name('page.index');
 Route::get('articles', [ PageController::class, 'article' ])->name('page.article');
+Route::get('article/{id}', [ PageController::class, 'viewArticle' ])->name('page.viewArticle');
+
 
 Route::get('login', [ PageController::class, 'loginPage' ])->name('login');
 Route::post('login', [ AuthController::class, 'authUser' ])->name('auth.login');

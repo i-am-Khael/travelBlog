@@ -15,11 +15,11 @@ class PageController extends Controller
     public function index() {
 
         $header = Header::where('isPublished', true)->orderBy('created_at', 'desc')->get();
-        $article = Article::where('featured', true)->get();
+        $articles = Article::where('featured', true)->orderBy('created_at', 'desc')->get();
 
         $data = [
             'header' => $header,
-            'article' => $article
+            'articles' => $articles
         ];
 
         return view('pages.index', $data );
@@ -30,6 +30,14 @@ class PageController extends Controller
 
         $articles = Article::orderBy('created_at','desc')->paginate(6);
         return view('pages.articles', [ 'articles' => $articles ]);
+
+    }
+
+
+    public function viewArticle($id) {
+
+        $article = Article::findOrFail($id);
+        return view('pages.viewArticle', [ 'article' => $article ]);
 
     }
 
