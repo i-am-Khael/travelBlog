@@ -26,6 +26,13 @@ class PageController extends Controller
 
     }
 
+    public function article() {
+
+        $articles = Article::orderBy('created_at','desc')->paginate(6);
+        return view('pages.articles', [ 'articles' => $articles ]);
+
+    }
+
     public function loginPage(Request $request) {
 
         $this->logout($request);
