@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('title');
             $table->longText('content');
-            $table->boolean('featured')->default(false);
+            $table->boolean('featured')->default(true);
             $table->binary('image')->nullable();
             $table->timestamps();
         });

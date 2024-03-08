@@ -13,8 +13,8 @@
 
                 @foreach ($articles as $article)
                     <a href="{{ route('page.viewArticle', $article->id) }}">
-                        <div class="w-full h-full p-4 rounded-md border-[1px] border-gray-50/5
-                            flex flex-col gap-3">
+                        <div class="w-full h-full p-4 rounded-md border-[1px] border-gray-50/5 shadow-lg
+                            flex flex-col gap-3 hover:border-gray-50">
 
                             <h3>{{ $article->title }}</h3>
 

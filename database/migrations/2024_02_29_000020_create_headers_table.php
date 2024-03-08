@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->longtext('desc');
             $table->binary('image')->nullable();
-            $table->boolean('isPublished')->default(false);
+            $table->boolean('isPublished')->default(true);
             $table->timestamps();
         });
     }

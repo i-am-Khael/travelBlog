@@ -9,7 +9,7 @@
             <div class="w-full h-full my-12 grid grid-cols-3 place-items-center gap-4 max-lg:grid-cols-2 max-sm:grid-cols-1">
 
                 @foreach ($articles as $article)
-                    <div class="p-4 rounded-md border-[1px] border-gray-50/5 shadow-lg">
+                    <div class="p-4 rounded-md border-[1px] border-gray-50/5 shadow-lg hover:border-gray-50">
 
                         <p class="pb-4 text-lg font-bold tracking-wide">{{ $article->title }}</p>
 
