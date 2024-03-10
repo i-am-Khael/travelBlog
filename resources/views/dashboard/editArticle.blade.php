@@ -12,25 +12,27 @@
         @method('put') @csrf
 
         <div class="flex flex-col gap-2">
-            <label for="title">Title</label>
-            <input name="title" type="text" value="{{$data->title}}" >
+            <label for="title" class="font-semibold" >Title</label>
+            <input name="title" type="text" value="{{$data->title}}" 
+                class="w-full p-2 outline-none border-b-[1px] border-gray-50/5 focus:border-gray-50 bg-transparent" >
             <x-formErrors inputName="title" />
         </div>
 
         <div class="flex flex-col gap-2">
-            <label for="content">Content</label>
-            <textarea name="content" id="content" cols="30" rows="10">{{ $data->content }}</textarea>
+            <label for="content" class="font-semibold" >Content</label>
+            <textarea name="content" id="content" cols="30" rows="10"
+                class="p-2 border-[1px] border-gray-50/5 focus:border-gray-50 outline-none bg-transparent" >{{ $data->content }}</textarea>
             <x-formErrors inputName="content" />
         </div>
 
         <div class="flex flex-col gap-2">
-            <label for="image">Image</label>
+            <label for="image" class="font-semibold" >Image</label>
             <input name="image" id="image" type="file" >
             <x-formErrors inputName="image" />
         </div>
 
         <div class="flex flex-col gap-2">
-            <label for="featured">Featured</label>
+            <label for="featured" class="font-semibold" >Featured</label>
             <div class="flex gap-6">
                 <div class="flex" >
                     <input type="radio" name="featured" id="yes" value="1" {{ $data->featured === 1 ? 'checked' : '' }} >
@@ -43,7 +45,7 @@
             </div>
         </div>
 
-        <button class="w-full py-2" >Update</button>
+        <button class="w-full py-2 w-full bg-gray-50 text-gray-900 hover:bg-gray-50/10 hover:text-gray-50" >Update</button>
 
     </form>
 
