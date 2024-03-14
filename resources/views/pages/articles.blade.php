@@ -24,7 +24,7 @@
                         </div>
 
                         <div class="py-4 justify-text flex flex-col gap-4">
-                            <p class="line-clamp-3">{{ $article->content }}</p>
+                            <p class="">{{ Str::words($article->content, 20) }}</p>
                         </div>
 
 
@@ -41,7 +41,6 @@
             </div>
 
         </section>
-
 
     </main>
 @endsection

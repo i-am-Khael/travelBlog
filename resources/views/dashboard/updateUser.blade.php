@@ -2,10 +2,10 @@
 @extends('layouts.__dashLayout')
 @section('title', 'Update User')
 @section('content')
-<section class="w-full h-screen p-4 overflow-scroll flex justify-center">
+<section class="w-full h-screen overflow-scroll flex items-center justify-center">
 
     <form action="{{ route('user.update', $user->id) }}" method="POST"
-        class="w-[400px] max-sm:w-[90%] h-[300px] mx-auto p-4 border-[1px] border-gray-50/5 shadow-lg
+        class="w-[400px] max-md:w-full p-5 rounded-md border-[1px] border-gray-50/5 shadow-lg
             flex flex-col gap-5" >
 
         @method('put') @csrf
@@ -26,7 +26,7 @@
             <x-formErrors inputName="email" />
         </div>
 
-        <button class="w-full py-2 bg-gray-50 text-gray-900 hover:bg-gray-50/10 hover:text-gray-50" >Update</button>
+        <button class="w-full py-2 rounded-md bg-gray-50 text-gray-900 hover:bg-gray-50/10 hover:text-gray-50" >Update</button>
 
     </form>
 
